@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+@use "../foundation" as f;
+
+.l-main {
+    margin-top: 56px;
+    background-color: f.$bg-color;
+    color: f.$color;
+}

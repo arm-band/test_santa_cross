@@ -1,0 +1,91 @@
+<%- include('partial/_head') %>
+<body>
+<%- include('partial/_header') %>
+<main class="l-main">
+    <section class="container py-5">
+        <h1 class="c-heading_maha"><i class="fas fa-fw fa-sun mr-2" aria-hidden="true"></i><%= parameters.title %></h1>
+        <p><%= parameters.description %></p>
+    </section>
+    <section class="container pb-5 graharaja">
+        <h2 class="c-heading_maha mt-4 mb-3">星宿の王</h2>
+        <div class="c-kuyo">
+            <div class="layoutWrapper">
+                <div class="smallLayout smallLayout1">
+                    <div class="smallb ball smallball1">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="smallb ball smallball2">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="smallb ball smallball3">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="smallb ball smallball4">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="smallLayout smallLayout2">
+                    <div class="smallb ball smallball5">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="smallb ball smallball6">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="smallb ball smallball7">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="smallb ball smallball8">
+                        <i class="fas fa-fw fa-circle" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="layoutCircle"></div>
+            </div>
+        </div>
+    </section>
+<%
+const Parva = [
+    'Adi Parva',
+    'Sabha Parva',
+    'Vana Parva',
+    'Virata Parva',
+    'Udyoga Parva',
+    'Bhishma Parva',
+    'Drona Parva',
+    'Karna Parva',
+    'Shalya Parva',
+    'Sauptika Parva',
+    'Stri Parva',
+    'Shanti Parva',
+    'Anushasana Parva',
+    'Ashvamedhika Parva',
+    'Ashramavasika Parva',
+    'Mausala Parva',
+    'Mahaprasthanika Parva',
+    'Svargarohana Parva',
+    'Harivamsa Parva'
+];
+-%>
+    <div class="container pb-5 mahabharata">
+        <h2 class="c-heading_maha mt-4 mb-3">Mahabharata</h2>
+<%
+for (const section of Parva) {
+-%>
+        <section class="c-parva p-3 mb-4">
+            <h3 class="c-heading_chota mt-4 mb-3"><%= section %></h3>
+            <div class="c-contents">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </section>
+<%
+}
+-%>
+    </div>
+</main>
+<%- include('partial/_footer') %>
+<%- include('partial/_js_loader') %>
+</body>
+</html>

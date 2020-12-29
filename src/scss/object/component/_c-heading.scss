@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+@use "../../foundation" as f;
+
+.c-heading {
+    &_maha {
+        color: f.$main-color;
+    }
+    &_chota {
+        color: f.$accent-color;
+    }
+}
+
+.mahabharata {
+    /* カウンタを `mahabharata` ごとにリセット */
+    counter-reset: number;
+    .c-heading_chota {
+        &::before {
+            /* 番号のデザイン */
+            color: f.$accent-color;
+            margin-right: 0.8rem;
+            /* 採番のインクリメント */
+            counter-increment: number;
+            /* brefore疑似要素に番号を自動採番で挿入。`decimal-leading-zero`でゼロパディングも実施 */
+            content: counter(number, decimal-leading-zero)".";
+        }
+    }
+}
