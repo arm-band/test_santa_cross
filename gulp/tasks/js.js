@@ -1,34 +1,24 @@
-const _         = require('../plugin');
-const dir       = require('../dir');
+const { dest }      = require('gulp');
+const plumber       = require('gulp-plumber');
+const notify        = require('gulp-notify');
+const rename        = require('gulp-rename');
+const webpackStream = require('webpack-stream');
+const dir           = require('../dir');
+const webpackConfig = require('../../webpack.config');
 
-//js圧縮&結合&リネーム
 const jsBuild = () => {
-    return _.gulp.src(
-        `${dir.src.js}/**/*.js`,
-        {
-            ignore: [
-                `${dir.src.js}/concat/**/*.js`
-            ]
-        }
-    )
-        .pipe(_.plumber({
-            errorHandler: _.notify.onError({
+    return webpackStream(webpackConfig)
+        .pipe(plumber({
+            errorHandler: notify.onError({
                 message: 'Error: <%= error.message %>',
-                title: 'js'
+                title: 'jsLibBuild'
             })
         }))
-        .pipe(_.concat('app.js'))
-        .pipe(_.gulp.dest(`${dir.src.js}/concat/`))
-        .pipe(_.uglify({
-            output: {
-                comments: 'some'
-            }
-        }))
-        .pipe(_.rename((path) => {
+        .pipe(rename((path) => {
             path.basename += '.min'
             path.extname = '.js'
         }))
-        .pipe(_.gulp.dest(dir.dist.js));
+        .pipe(dest(dir.dist.js));
 };
 
-module.exports = _.gulp.series(jsBuild);
+module.exports = jsBuild;

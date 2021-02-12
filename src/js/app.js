@@ -1,105 +1,134 @@
+class Ksanae {
+    /**
+     * kurenai: Intersection Observer API 用関数
+     *
+     * @params selectorObserved {String} : 監視対象要素のセレクタ
+     * @params callback {Function} : Intersection Observer API でコールバックとして呼ばれる処理
+     * @params options {Object} : Intersection Observer API に渡すオプション
+     * @params selectorAddClass {String} : クラスを付与する要素のセレクタ
+     *
+     * @return observer {Object} : Intersection Observer API のインスタンス
+     */
+    kurenai(selectorObserved, callback, options, selectorAddClass = '') {
+        // クラス付与要素
+        let elmAddClass;
+        if (selectorAddClass.length > 0) {
+            elmAddClass = document.querySelectorAll(selectorAddClass);
+        }
+        // 監視対象要素
+        const elmsObserved = document.querySelectorAll(selectorObserved);
+        // DOM to Array
+        const elmsObservedArray = Array.prototype.slice.call(elmsObserved, 0);
+        // instance
+        const observer = new IntersectionObserver(callback, options);
+        // observe
+        for (const elmObserved of elmsObservedArray) {
+            observer.observe(elmObserved);
+        }
+        return observer;
+    };
+    irome() {
+        const selectorObserved = '';
+        const callback = () => {};
+        const options = {};
+        const selectorAddClass = '';
+//        window.addEventListener('load', () => {
+            return this.kurenai(selectorObserved, callback, options, selectorAddClass);
+//        });
+    }
+    usuyo(observer) {
+//        window.addEventListener('resize', () => {
+            // 一旦監視を止める
+            observer.disconnect();
+            // 再度監視
+            return this.irome();
+//        });
+    }
+}
 /**
  * ヘッダの表示
  */
-const headerShow = () => {
-    // クラス付与要素
-    const headers = document.querySelectorAll('.l-header .navbar');
-    // 監視対象要素
-    const graharajas = document.querySelectorAll('.graharaja');
-    // DOM to Array
-    const graharajasArray = Array.prototype.slice.call(graharajas, 0);
-
-    // options
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0
-    };
-    /**
-     * callback
-     *
-     * @param elms
-     */
-    const santaCrossHeader = (elms) => {
-        const elmsArray = Array.prototype.slice.call(elms, 0);
-        for (const elm of elmsArray) {
-            // ブラウザ表示領域に対する対象要素の位置
-            const elmRectCoor = elm.target.getBoundingClientRect();
-            if ( 0 > elmRectCoor.bottom ) {
-                // ブラウザ表示領域に対する対象要素の上端の位置 が ブラウザの表示領域 より上
-                headers[0].classList.add('active');
+class HeaderKasane extends Ksanae {
+    irome() {
+        // クラス付与要素
+        const headers = '.l-header .navbar';
+        const elmHeaders = document.querySelectorAll(headers);
+        // 監視対象要素
+        const graharajas = '.graharaja';
+        // options
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0
+        };
+        /**
+         * callback
+         *
+         * @param elms
+         */
+        const santaCrossHeader = (elms) => {
+            const elmsArray = Array.prototype.slice.call(elms, 0);
+            for (const elm of elmsArray) {
+                // ブラウザ表示領域に対する対象要素の位置
+                const elmRectCoor = elm.target.getBoundingClientRect();
+                if ( 0 > elmRectCoor.bottom ) {
+                    // ブラウザ表示領域に対する対象要素の上端の位置 が ブラウザの表示領域 より上
+                    elmHeaders[0].classList.add('active');
+                }
+                else {
+                    elmHeaders[0].classList.remove('active');
+                }
             }
-            else {
-                headers[0].classList.remove('active');
-            }
-        }
-    };
-    // instance
-    const observer = new IntersectionObserver(santaCrossHeader, options);
-    // observe
-    for (const graharaja of graharajasArray) {
-        observer.observe(graharaja);
+        };
+        return this.kurenai(graharajas, santaCrossHeader, options, headers);
     }
-    return observer;
-};
+}
+
 /**
  * 章ごとのフェードイン表示
- *
- * @param clientHeight {Number} : ブラウザの高さ
  */
-const parvasShow = (clientHeight) => {
-    // 監視対象要素
-    const parvas = document.querySelectorAll('.c-parva');
-    // DOM to Array
-    const parvasArray = Array.prototype.slice.call(parvas, 0);
-
-    // options
-    const options = {
-        root: null,
-        rootMargin: '0px 0px -12%',
-        threshold: 0
-    };
-    /**
-     * callback
-     *
-     * @param elms
-     */
-    const santaCross = (elms) => {
-        const elmsArray = Array.prototype.slice.call(elms, 0);
-        for (const elm of elmsArray) {
-            // ブラウザ表示領域に対する対象要素の位置
-            const elmRectCoor = elm.target.getBoundingClientRect();
-            // if (elm.isIntersecting) { // この方法だと「交差しているか」なので対象要素が ブラウザ表示領域の上の場合反応しない(上にスクロールした際に表示される)
-            if ( elmRectCoor.top < clientHeight ) {
-                // ブラウザ表示領域に対する対象要素の位置 が ブラウザの高さ 未満 // この方法ならばブラウザの上にある要素も既に表示された状態になる
-                elm.target.classList.add('active');
+class ParvasKasane extends Ksanae {
+    irome() {
+        // ブラウザの高さ
+        const clientHeight = document.documentElement.clientHeight;
+        // 監視対象要素
+        const parvas = '.c-parva';
+        // options
+        const options = {
+            root: null,
+            rootMargin: '0px 0px -12%',
+            threshold: 0
+        };
+        /**
+         * callback
+         *
+         * @param elms
+         */
+        const santaCross = (elms) => {
+            const elmsArray = Array.prototype.slice.call(elms, 0);
+            for (const elm of elmsArray) {
+                // ブラウザ表示領域に対する対象要素の位置
+                const elmRectCoor = elm.target.getBoundingClientRect();
+                // if (elm.isIntersecting) { // この方法だと「交差しているか」なので対象要素が ブラウザ表示領域の上の場合反応しない(上にスクロールした際に表示される)
+                if ( elmRectCoor.top < clientHeight ) {
+                    // ブラウザ表示領域に対する対象要素の位置 が ブラウザの高さ 未満 // この方法ならばブラウザの上にある要素も既に表示された状態になる
+                    elm.target.classList.add('active');
+                }
             }
-        }
-    };
-    // instance
-    const observer = new IntersectionObserver(santaCross, options);
-    // observe
-    for (const parva of parvasArray) {
-        observer.observe(parva);
+        };
+        return this.kurenai(parvas, santaCross, options);
     }
-    return observer;
-};
+}
 
 window.addEventListener('load', () => {
-    // ブラウザの高さ
-    let clientHeight = document.documentElement.clientHeight;
+    const headerKasaneInstance = new HeaderKasane();
+    const parvasKasaneInstance = new ParvasKasane();
     // ヘッダの表示
-    let headerObserver = headerShow();
+    headerKasaneInstance.irome();
     // 章の表示
-    let parvasObserver = parvasShow(clientHeight);
+    parvasKasaneInstance.irome();
     window.addEventListener('resize', () => {
-        // resize でブラウザの表示領域の高さが変動したら
-        clientHeight = document.documentElement.clientHeight;
-        // 一旦監視を止める
-        headerObserver.disconnect();
-        parvasObserver.disconnect();
-        // 再度監視
-        headerObserver = headerShow();
-        parvasObserver = parvasShow(clientHeight);
+        headerKasaneInstance.usuyo();
+        parvasKasaneInstance.usuyo();
     });
 });
